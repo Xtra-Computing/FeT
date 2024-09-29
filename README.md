@@ -1,2 +1,3 @@
-# FeT
-Federated Transformer (NeurIPS 24)
+# Federated Transformer 
+
+Code will be released before the conference.
