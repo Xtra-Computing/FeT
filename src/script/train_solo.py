@@ -8,8 +8,6 @@ import numpy as np
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
-from torchvision.models import resnet18
-# from torchsummaryX import summary
 
 import pandas as pd
 from tqdm import tqdm
@@ -26,7 +24,6 @@ from dataset.VFLRealDataset import VFLRealDataset
 from src.preprocess.nytaxi.ny_loader import NYBikeTaxiLoader
 from src.preprocess.hdb.hdb_loader import load_both as load_both_hdb
 from src.preprocess.ml_dataset.two_party_loader import TwoPartyLoader as FedSimSynLoader
-from src.model.SoloTransformer import SoloTrans
 
 if __name__ == '__main__':
     # arguments
