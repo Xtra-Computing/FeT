@@ -1,5 +1,5 @@
 # Python
-__pycache__/
+**/__pycache__/
 *.py[cod]
 *$py.class
 *.so
@@ -42,7 +42,6 @@ cache/
 log/
 fig/
 out/
-__pycache__/
 
 # OS generated files
 .DS_Store
@@ -52,4 +51,3 @@ __pycache__/
 .Trashes
 ehthumbs.db
 Thumbs.db
-
