@@ -1,4 +1,4 @@
-# Federated Transformer (FeT)
+# [NeruIPS 2024] Federated Transformer (FeT)
 
 This paper _"Federated Transformer: Multi-Party Vertical Federated Learning on Practical Fuzzily Linked Data"_ has been accepted by _**NeurIPS 2024**_.
 
