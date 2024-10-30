@@ -138,51 +138,10 @@ if __name__ == '__main__':
                                      sample_rate_before_topk=args.dp_sample)
         train_dataset, val_dataset, test_dataset = hdb_dataset.split_train_test_primary(
             val_ratio=0.1, test_ratio=0.2, random_state=args.seed, shuffle=True)
-    elif args.dataset == 'boone':
-        key_dim = 30
-        boone_root = f"{real_root}/MiniBooNE_PID.txt_scale_{args.key_noise:.1f}_loader.pkl"
-        data_loader = FedSimSynLoader.from_pickle(boone_root)
-        [X1, X2], y = data_loader.load_parties()
-
-        # in FedSim, the common features of X1 is at the end, move it to the front
-        X1 = np.concatenate([X1[:, -key_dim:], X1[:, :-key_dim]], axis=1)
-
-        # Append 20 empty columns since it feature_dim is smaller than key_dim, which leads to an error in
-        # PositionalEncoding
-        X1 = np.concatenate([X1, np.zeros([X1.shape[0], 20])], axis=1)
-        X2 = np.concatenate([X2, np.zeros([X2.shape[0], 20])], axis=1)
-
-        boone_dataset = VFLRealDataset(([X1, X2], y), primary_party_id=0, key_cols=key_dim, ks=args.knn_k)
-        train_dataset, val_dataset, test_dataset = boone_dataset.split_train_test_primary(
-            val_ratio=0.1, test_ratio=0.2, random_state=args.seed)
-    elif args.dataset == 'frog':
-        key_dim = 16
-        frog_root = f"{real_root}/Frogs_MFCCs.csv_scale_{args.key_noise:.1f}_loader.pkl"
-        data_loader = FedSimSynLoader.from_pickle(frog_root)
-        [X1, X2], y = data_loader.load_parties()
-
-        # in FedSim, the common features of X1 is at the end, move it to the front
-        X1 = np.concatenate([X1[:, -key_dim:], X1[:, :-key_dim]], axis=1)
-
-        # Append 13 empty columns since it feature_dim is smaller than key_dim, which leads to an error in
-        # PositionalEncoding
-        X1 = np.concatenate([X1, np.zeros([X1.shape[0], 13])], axis=1)
-        X2 = np.concatenate([X2, np.zeros([X2.shape[0], 13])], axis=1)
-
-        frog_dataset = VFLRealDataset(([X1, X2], y), primary_party_id=0, key_cols=key_dim, ks=args.knn_k)
-        train_dataset, val_dataset, test_dataset = frog_dataset.split_train_test_primary(
-            val_ratio=0.1, test_ratio=0.2, random_state=args.seed)
-
-    elif args.dataset in ("cifar10", "gisette", "mnist", "radar"):
+    elif args.dataset in ("gisette", "mnist"):
         # multi_party_dataset for scalability
         normalize_key = False
-
-        if args.dataset in ("cifar10", "mnist"):
-            key_dim = 4
-        elif args.dataset in ("radar"):
-            key_dim = 4
-        else:
-            key_dim = 4
+        key_dim = 4
 
         syn_dataset_dir = f"data/syn/{args.dataset}/noise{args.key_noise}/"
 
