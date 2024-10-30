@@ -158,20 +158,6 @@ class TopkSimAsProbSampler(SimSampler):
 
         return sampled_indices
 
-# def diskcache(func):
-#     def wrapper(self, idx):
-#         key = idx
-#         if self.cache_path is not None:
-#             if key in self.cache:
-#                 return self.cache[key]
-#             else:
-#                 result = func(self, idx)
-#                 self.cache[key] = result
-#                 return result
-#         else:
-#             return func(self, idx)
-#     return wrapper
-
 
 def conditional_cached(cache_key, cache=LRUCache(maxsize=10**7)):
     def decorator(func):
@@ -204,9 +190,6 @@ class TopkSampler(SimSampler):
             raise ValueError(f"The length of ks {len(self.ks)} should be the same as the number of parties "
                              f"{self.n_datasets}")
         self.cache_key = cache_key
-        # self.cache_path = cache_path
-        # if self.cache_path is not None:
-        #     self.cache = Cache(self.cache_path)
 
     # @conditional_cached(cache_key=lambda self: self.cache_key)
     def sample(self, idx):
@@ -241,17 +224,6 @@ class TopkSampler(SimSampler):
                     nbr_ids = np.concatenate([nbr_ids, np.random.choice(nbr_ids, self.ks[data_id] - len(nbr_ids))])
             else:
                 nbr_ids, dist = self.indices[data_id].knnQuery(primary_key, k=self.ks[data_id])
-
-            # # debug: can be optimized. to shuffle the secondary indices
-            # if data_id != self.primary_party_id:
-            #     np.random.shuffle(nbr_ids)
-
-            # # debug: can be optimized. to ensure the first element in primary neighbors is itself
-            # if data_id == self.primary_party_id:
-            #     if idx in nbr_ids:
-            #         nbr_ids = np.concatenate([np.array([idx]), nbr_ids[nbr_ids != idx]])
-            #     else:
-            #         nbr_ids = np.concatenate([np.array([idx]), nbr_ids[:-1]])
 
             sampled_indices.append(nbr_ids)
 

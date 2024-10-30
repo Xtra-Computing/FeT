@@ -1,5 +1,14 @@
 # [NeruIPS 2024] Federated Transformer (FeT)
 
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![NeurIPS 2024](https://img.shields.io/badge/NeurIPS-2024-red.svg)](https://neurips.cc/Conferences/2024)
+[![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/release/python-3100/)
+[![PyTorch 2.1.2](https://img.shields.io/badge/PyTorch-2.1.2-EE4C2C.svg)](https://pytorch.org/)
+[![CUDA 12.1](https://img.shields.io/badge/CUDA-12.1-76B900.svg)](https://developer.nvidia.com/cuda-toolkit)
+
+
+
+
 This paper _"Federated Transformer: Multi-Party Vertical Federated Learning on Practical Fuzzily Linked Data"_ has been accepted by _**NeurIPS 2024**_.
 
 ## Project Overview

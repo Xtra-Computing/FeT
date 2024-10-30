@@ -42,22 +42,7 @@ if __name__ == '__main__':
     parser.add_argument('--weights', '-w', type=float, default=1, help="weights for the ImportanceSplitter")
     parser.add_argument('--beta', '-b', type=float, default=1, help="beta for the CorrelationSplitter")
     parser.add_argument('--key-noise', type=float, default=0.0, help='key noise in FedSim synthetic data')
-
-    # # parameters for model
-    # parser.add_argument('--epochs', '-e', type=int, default=50)
-    # parser.add_argument('--lr', '-lr', type=float, default=1e-3)
-    # parser.add_argument('--weight_decay', '-wd', type=float, default=1e-5)
-    # parser.add_argument('--batch_size', '-bs', type=int, default=128)
-    # parser.add_argument('--n_classes', '-c', type=int, default=7,
-    #                     help="number of classes. 1 for regression, 2 for binary classification,"
-    #                          ">=3 for multi-class classification")
-    # parser.add_argument('--metric', '-m', type=str, default='acc',
-    #                     help="metric to evaluate the model. Supported metrics: [accuracy, rmse]")
-    # parser.add_argument('--result-path', '-rp', type=str, default=None,
-    #                     help="path to save the result")
-    # parser.add_argument('--seed', '-s', type=int, default=0, help="random seed")
-    # parser.add_argument('--key-noise', type=float, default=0.0, help="key noise scale")
-
+    
     # parameters for model
     parser.add_argument('--epochs', '-e', type=int, default=100)
     parser.add_argument('--lr', '-lr', type=float, default=1e-3)
@@ -176,13 +161,6 @@ if __name__ == '__main__':
 
     # use SplitSum
     model = MLP(train_dataset.key_X_dim, [400, 400], out_dim, activation=out_activation)
-    # model = SoloTrans(data_dim=train_dataset.X.shape[1],
-    #                   out_dim=out_dim, data_embed_dim=args.data_embed_dim,
-    #                   key_embed_dim=args.key_embed_dim,
-    #                   num_heads=args.num_heads, dropout=args.dropout,
-    #                   # n_embeddings=len(train_dataset) + len(test_dataset),
-    #                   n_embeddings=None, out_activation=out_activation,
-    #                   n_local_blocks=args.n_local_blocks, n_agg_blocks=args.n_agg_blocks)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, factor=0.5, patience=5, verbose=True)
