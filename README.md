@@ -9,7 +9,7 @@
 
 
 
-This paper _"Federated Transformer: Multi-Party Vertical Federated Learning on Practical Fuzzily Linked Data"_ has been accepted by _**NeurIPS 2024**_.
+This paper _"[Federated Transformer: Multi-Party Vertical Federated Learning on Practical Fuzzily Linked Data](https://arxiv.org/pdf/2410.17986)"_ has been accepted by _**NeurIPS 2024**_.
 
 ## Project Overview
 
